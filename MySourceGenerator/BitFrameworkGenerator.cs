@@ -28,11 +28,6 @@ namespace MySourceGenerator
 
         string GeneratePartialClassToOverrideSetParametersAsync(INamedTypeSymbol classSymbol, List<IPropertySymbol> properties, GeneratorExecutionContext context)
         {
-            if (!classSymbol.ContainingSymbol.Equals(classSymbol.ContainingNamespace, SymbolEqualityComparer.Default))
-            {
-                return null; //TODO: issue a diagnostic that it must be top level
-            }
-
             string namespaceName = classSymbol.ContainingNamespace.ToDisplayString();
 
             StringBuilder source = new StringBuilder($@"
