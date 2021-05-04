@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -24,6 +25,8 @@ namespace MySourceGenerator
         public void Initialize(GeneratorInitializationContext context)
         {
             context.RegisterForSyntaxNotifications(() => new BitSyntaxReceiver());
+
+            //Debugger.Launch();
         }
 
         string GeneratePartialClassToOverrideSetParametersAsync(INamedTypeSymbol classSymbol, List<IPropertySymbol> properties, GeneratorExecutionContext context)
@@ -57,7 +60,14 @@ namespace {namespaceName}
             source.AppendLine("                }");
             source.AppendLine("            }");
 
-            source.AppendLine("            return base.SetParametersAsync(parameters);");
+            if (classSymbol.BaseType.ToDisplayString() == "Microsoft.AspNetCore.Components.ComponentBase")
+            {
+                source.AppendLine("            return base.SetParametersAsync(ParameterView.Empty);");
+            }
+            else
+            {
+                source.AppendLine("            return base.SetParametersAsync(parameters);");
+            }
             source.AppendLine("        }");
             source.AppendLine("    }");
             source.AppendLine("}");

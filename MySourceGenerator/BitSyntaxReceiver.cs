@@ -23,7 +23,7 @@ namespace MySourceGenerator
 
                 IPropertySymbol propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclarationSyntax);
 
-                if (propertySymbol.GetAttributes().Any(ad => ad.AttributeClass.ToDisplayString() == "Microsoft.AspNetCore.Components.ParameterAttribute"))
+                if (propertySymbol.GetAttributes().Any(ad => ad.AttributeClass.ToDisplayString() == "Microsoft.AspNetCore.Components.ParameterAttribute" || ad.AttributeClass.ToDisplayString() == "Microsoft.AspNetCore.Components.CascadingParameterAttribute"))
                 {
                     Properties.Add(propertySymbol);
                 }

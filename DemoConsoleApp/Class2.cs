@@ -17,6 +17,8 @@ namespace DemoConsoleApp
     {
         [Display(Name = "PropTest3")]
         public int MyProperty { get; set; }
+        [CascadingParameter]
+        public int MyProperty2 { get; set; }
     }
 
     public partial class Class4
@@ -26,6 +28,14 @@ namespace DemoConsoleApp
         public int MyProperty { get; set; }
 
         [Parameter]
+        public int MyProperty2 { get; set; }
+    }
+
+    public partial class Class5 : ComponentBase
+    {
+        [Display(Name = "PropTest3")]
+        public int MyProperty { get; set; }
+        [CascadingParameter]
         public int MyProperty2 { get; set; }
     }
 }

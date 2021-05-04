@@ -9,4 +9,8 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.5" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\MySourceGenerator\MySourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	</ItemGroup>
+
 </Project>
