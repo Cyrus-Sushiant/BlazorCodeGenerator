@@ -26,7 +26,7 @@ namespace MySourceGenerator
         {
             context.RegisterForSyntaxNotifications(() => new BitSyntaxReceiver());
 
-            //Debugger.Launch();
+            Debugger.Launch();
         }
 
         string GeneratePartialClassToOverrideSetParametersAsync(INamedTypeSymbol classSymbol, List<IPropertySymbol> properties, GeneratorExecutionContext context)
@@ -41,7 +41,7 @@ using System;
 
 namespace {namespaceName}
 {{
-    public partial class {classSymbol.Name}  
+    public{(classSymbol.IsAbstract ? " abstract" : null)} partial class {classSymbol.Name}  
     {{
         public override Task SetParametersAsync(ParameterView parameters) 
         {{

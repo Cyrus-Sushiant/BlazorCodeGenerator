@@ -38,4 +38,12 @@ namespace DemoConsoleApp
         [CascadingParameter]
         public int MyProperty2 { get; set; }
     }
+
+    public abstract partial class Class6 : ComponentBase
+    {
+        [Display(Name = "PropTest3")]
+        public int MyProperty { get; set; }
+        [CascadingParameter]
+        public int MyProperty2 { get; set; }
+    }
 }
