@@ -46,4 +46,14 @@ namespace DemoConsoleApp
         [CascadingParameter]
         public int MyProperty2 { get; set; }
     }
+
+    public partial class BitBasicList<TItem> : ComponentBase
+    {
+        [Display(Name = "PropTest")]
+        [Parameter]
+        public int MyProperty { get; set; }
+
+        [Parameter]
+        public int MyProperty2 { get; set; }
+    }
 }

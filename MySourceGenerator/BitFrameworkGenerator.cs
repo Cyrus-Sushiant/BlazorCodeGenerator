@@ -26,7 +26,7 @@ namespace MySourceGenerator
         {
             context.RegisterForSyntaxNotifications(() => new BitSyntaxReceiver());
 
-            Debugger.Launch();
+            //Debugger.Launch();
         }
 
         string GeneratePartialClassToOverrideSetParametersAsync(INamedTypeSymbol classSymbol, List<IPropertySymbol> properties, GeneratorExecutionContext context)
@@ -41,7 +41,7 @@ using System;
 
 namespace {namespaceName}
 {{
-    public partial class {classSymbol.Name}  
+    public partial class {GetName(classSymbol)}  
     {{
         public override Task SetParametersAsync(ParameterView parameters) 
         {{
@@ -80,6 +80,20 @@ namespace {namespaceName}
             source.AppendLine($"                    case nameof({propertySymbol.Name}):");
             source.AppendLine($"                       {propertySymbol.Name} = ({propertySymbol.Type.ToDisplayString()})parameter.Value;");
             source.AppendLine("                       break;");
+        }
+
+        public string GetName(INamedTypeSymbol type)
+        {
+            StringBuilder stringBuilder = new StringBuilder(type.Name);
+
+            if (type.IsGenericType)
+            {
+                stringBuilder.Append("<");
+                stringBuilder.Append(string.Join(", ", type.TypeArguments.Select(s => s.Name)));
+                stringBuilder.Append(">");
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }
